@@ -1,0 +1,88 @@
+trigger:
+    - main
+    - dev
+    - qa
+
+pr: none
+
+stages:
+- stage: Dev
+  displayName: 'Dev'
+  dependsOn: []
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/dev')
+  jobs:
+  - job: Build
+    displayName: 'Build ZIP File and Deploy to WebApp'
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: ArchiveFiles@2
+      inputs:
+       rootFolderOrFile: '$(build.sourcesDirectory)'
+       includeRootFolder: false
+       archiveType: 'zip'
+       archiveFile: '$(Build.ArtifactStagingDirectory)/html-website.zip'
+       replaceExistingArchive: true
+
+    - task: AzureRmWebAppDeployment@4
+      inputs:
+       ConnectionType: 'AzureRM'
+       azureSubscription: 'Azure-Connection'
+       appType: 'webAppLinux'
+       WebAppName: 'webapp-1-dev'
+       packageForLinux: '$(Build.ArtifactStagingDirectory)/html-website.zip'
+       RuntimeStack: 'PHP|8.1'
+
+- stage: QA
+  displayName: 'QA'
+  dependsOn: []
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/qa')
+  jobs:
+  - job: Build
+    displayName: 'Build ZIP File and Deploy to WebApp'
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: ArchiveFiles@2
+      inputs:
+       rootFolderOrFile: '$(build.sourcesDirectory)'
+       includeRootFolder: false
+       archiveType: 'zip'
+       archiveFile: '$(Build.ArtifactStagingDirectory)/html-website.zip'
+       replaceExistingArchive: true
+
+    - task: AzureRmWebAppDeployment@4
+      inputs:
+       ConnectionType: 'AzureRM'
+       azureSubscription: 'Azure-Connection'
+       appType: 'webAppLinux'
+       WebAppName: 'webapp-2-qa'
+       packageForLinux: '$(Build.ArtifactStagingDirectory)/html-website.zip'
+       RuntimeStack: 'PHP|8.1'
+
+- stage: Production
+  displayName: 'prod'
+  dependsOn: []
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/main')
+  jobs:
+  - job: Build
+    displayName: 'Build ZIP File and Deploy to WebApp'
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: ArchiveFiles@2
+      inputs:
+       rootFolderOrFile: '$(build.sourcesDirectory)'
+       includeRootFolder: false
+       archiveType: 'zip'
+       archiveFile: '$(Build.ArtifactStagingDirectory)/html-website.zip'
+       replaceExistingArchive: true
+
+    - task: AzureRmWebAppDeployment@4
+      inputs:
+       ConnectionType: 'AzureRM'
+       azureSubscription: 'Azure-Connection'
+       appType: 'webAppLinux'
+       WebAppName: 'webapp-3-prod'
+       packageForLinux: '$(Build.ArtifactStagingDirectory)/html-website.zip'
+       RuntimeStack: 'PHP|8.1'

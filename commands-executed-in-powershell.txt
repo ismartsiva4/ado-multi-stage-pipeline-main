@@ -1,0 +1,125 @@
+Id CommandLine
+  -- -----------
+   1 cd C:\Workspaces\
+   2 mkdir demo\
+   3 cd .\demo\
+   4 git init
+   5 git branch -a
+   6 git status
+   7 git branch dev
+   8 notepad file.txt
+   9 git add .
+  10 git commit -m "c1"
+  11 ls
+  12 git status
+  13 git branch -a
+  14 git branch dev
+  15 git branch qa
+  16 git branch staging
+  17 git branch -a
+  18 cd .git
+  19 cd refs
+  20 cd .\heads\
+  21 dir
+  22 git checkout main
+  23 cd ../../..
+  24 git checkout main
+  25 git branch -a
+  26 git branch -m prod
+  27 git branch -a
+  28 cd ./..
+  29 dir
+  30 cd ADO\
+  31 ls
+  32 clear
+  33 mkdir corp-webapp
+  34 cd corp-webapp
+  35 git init
+  36 git status
+  37 notepad azure-pipelines.yml
+  38 git status
+  39 git add .
+  40 git commit -m "Added azure-pipelines.yml in main Br"
+  41 cls
+  42 ls
+  43 git branch dev
+  44 git branch qa
+  45 git branch -a
+  46 git checkout dev
+  47 ls
+  48 git checkout qa
+  49 ls
+  50 git checkout dev
+  51 cls
+  52 copy C:\Users\ragha\Downloads\corp-website\* .
+  53 git branch -A
+  54 git branch -a
+  55 cls
+  56 ls
+  57 git status
+  58 git status
+  59 git status
+  60 git status
+  61 git add .
+  62 git commit -m "Dev Final Code"
+  63 cls
+  64 ls
+  65 git branch -a
+  66 git checkout qa
+  67 ls
+  68 git checkout dev
+  69 cls
+  70 git branch -a
+  71 ls
+  72 cls
+  73 az login
+  74 cls
+  75 az devops project create `...
+  76 az devops configure --defaults organization=https://dev.azure.com/cloudwithraghu project=corp-webapp
+  77 cls
+  78 azure repo list
+  79 az repo list
+  80 az repos list
+  81 cla
+  82 cls
+  83 git branch -a
+  84 git remote -v
+  85 az repos list
+  86 git remote add origin https://dev.azure.com/cloudwithraghu/corp-webapp/_git/corp-webapp
+  87 git remote -v\
+  88 cls
+  89 git remote -v
+  90 git push -u origin --all
+  91 git branch -a
+  92 cls
+  93 az group create --location northeurope --name webapps-rg
+  94 az appservice plan create `...
+  95 az appservice plan create `...
+  96 az appservice plan create `...
+  97 az webapp create `...
+  98 git fetch
+  99 ls
+ 100 notepad .\azure-pipelines.yml
+ 101 git pull
+ 102 notepad .\azure-pipelines.yml
+ 103 git checkout dev
+ 104 cls
+ 105 notepad trigger.txt
+ 106 git add .
+ 107 git commit -m "triggering dev stage"
+ 108 git push -u origin --all
+ 109 notepad trigger.txt
+ 110 git add .
+ 111 git commit -m "triggering dev stage 2nd time"
+ 112 git push -u origin --all
+ 113 git checkout qa
+ 114 git branch -a
+ 115 git merge dev
+ 116 git add .
+ 117 git commit -m "QA is committed with a copy of DEV code"
+ 118 git push -u origin --all
+ 119 git checkout main
+ 120 git merge dev
+ 121 git add .
+ 122 git commit -m "Prod committed"
+ 123 git push -u origin --all
